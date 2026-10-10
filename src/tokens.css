@@ -1,0 +1,94 @@
+/*
+  TOKENS: the only file in this project that may hold colour literals.
+
+  Palette provenance. Every hex below is a real pixel of a supplied asset.
+  Method: k-means (k=8 on brand/LOGO NUSPAD PNG...png, opaque pixels only, deterministic
+  seed; k=6 on the reference banners), each centroid snapped to the nearest real pixel.
+  The "px" tag after each literal is "<file> @x,y"; the gate re-reads that pixel and
+  fails the build when it no longer matches.
+*/
+:root {
+  /* surfaces, from the banner art */
+  --c-bg: #010f10;        /* px reference/SAMPUL NUSPAD JPG.jpg.jpeg @957,5 */
+  --c-bg-deep: #00090c;   /* px reference/NUSPAD 1.jpg.jpeg @578,53 */
+  --c-teal-dark: #023a2d; /* px reference/SAMPUL NUSPAD JPG.jpg.jpeg @133,45 */
+  --c-teal-mid: #0e4047;  /* px reference/NUSPAD 1.jpg.jpeg @142,85 */
+  /* ink */
+  --c-ink: #defaeb;       /* px reference/NUSPAD 1.jpg.jpeg @1208,365 */
+  --c-ink-glow: #ffffff;  /* px reference/NUSPAD 1.jpg.jpeg @1330,33 */
+  /* brand hues, from the logo glass */
+  --c-blue: #03c7f5;      /* px brand/LOGO NUSPAD PNG...png @891,954 */
+  --c-mint: #0adcbd;      /* px brand/LOGO NUSPAD PNG...png @949,910 */
+  --c-aqua: #4ef8e8;      /* px brand/LOGO NUSPAD PNG...png @1211,1044 */
+  --c-green: #36ec88;     /* px brand/LOGO NUSPAD PNG...png @1296,1236 */
+  --c-lime: #6ef150;      /* px brand/LOGO NUSPAD PNG...png @1407,1306 */
+  --c-yellow: #bff221;    /* px brand/LOGO NUSPAD PNG...png @1326,694 */
+  --c-pale: #bef97e;      /* px brand/LOGO NUSPAD PNG...png @1367,1227 */
+}
+
+:root {
+  /* derived surfaces: mixes of the sampled colours, no new literals */
+  --bg: var(--c-bg);
+  --bg-deep: var(--c-bg-deep);
+  --surface-1: color-mix(in oklab, var(--c-bg) 86%, var(--c-teal-mid));
+  --surface-2: color-mix(in oklab, var(--c-bg) 72%, var(--c-teal-mid));
+  --surface-3: color-mix(in oklab, var(--c-bg) 52%, var(--c-teal-mid));
+  --border: color-mix(in oklab, var(--c-bg) 58%, var(--c-teal-mid) 42%);
+  --border-strong: color-mix(in oklab, var(--c-teal-mid) 64%, var(--c-ink) 36%);
+  --ink: var(--c-ink);
+  --muted: color-mix(in oklab, var(--c-ink) 68%, var(--c-bg));
+  --subtle: color-mix(in oklab, var(--c-ink) 54%, var(--c-bg));
+  --brand: var(--c-lime);
+  --brand-ink: var(--c-pale);
+  --on-brand: var(--c-bg-deep);
+  --aqua: var(--c-aqua);
+  --blue: var(--c-blue);
+  --up: var(--c-green);
+  --down: var(--c-blue);
+  --focus: var(--c-aqua);
+  --tint-brand: color-mix(in oklab, var(--c-lime) 12%, transparent);
+  --tint-aqua: color-mix(in oklab, var(--c-aqua) 13%, transparent);
+  --tint-up: color-mix(in oklab, var(--c-green) 14%, transparent);
+  --tint-down: color-mix(in oklab, var(--c-blue) 16%, transparent);
+  --shade: color-mix(in oklab, var(--c-bg-deep) 72%, transparent);
+  --overlay: color-mix(in oklab, var(--c-bg-deep) 70%, transparent);
+  --grad-brand: linear-gradient(100deg, var(--c-yellow) 0%, var(--c-green) 38%, var(--c-aqua) 70%, var(--c-blue) 100%);
+  --grad-soft: linear-gradient(100deg, color-mix(in oklab, var(--c-lime) 18%, transparent), color-mix(in oklab, var(--c-blue) 18%, transparent));
+  --glow-brand: 0 0 0 1px color-mix(in oklab, var(--c-lime) 35%, transparent), 0 8px 32px -6px color-mix(in oklab, var(--c-lime) 35%, transparent);
+  --glow-aqua: 0 0 0 1px color-mix(in oklab, var(--c-aqua) 40%, transparent), 0 10px 36px -8px color-mix(in oklab, var(--c-aqua) 45%, transparent);
+  --shadow-pop: 0 18px 48px -12px var(--shade), 0 0 0 1px var(--border);
+
+  /* measured from the reference: type, radii, layers, easing, timing */
+  --font-display: "Bricolage Grotesque Variable", "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --fs-micro: 0.6875rem;
+  --fs-label: 0.75rem;
+  --fs-body: 0.875rem;
+  --fs-stat: 1.0625rem;
+  --fs-section: 1.125rem;
+  --fs-title: 1.375rem;
+  --fs-page: 1.875rem;
+  --fs-display: 2.75rem;
+  --r-control: 10px;
+  --r-panel: 14px;
+  --r-module: 20px;
+  --appbar-h: 64px;
+  --maxw: 1728px;
+  --z-sticky: 20;
+  --z-appbar: 30;
+  --z-dropdown: 40;
+  --z-overlay: 50;
+  --z-toast: 70;
+  --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur-press: 0.14s;
+  --dur-hover: 0.26s;
+  --dur-route: 0.26s;
+  --dur-panel: 0.32s;
+  --dur-flash: 0.6s;
+  --dur-skeleton: 1.6s;
+  --dur-live: 1.8s;
+  --dur-marquee: 60s;
+}

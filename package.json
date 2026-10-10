@@ -1,0 +1,18 @@
+{
+  "name": "nuspad",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nuspad",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "gates": "node scripts/gates.mjs"
+  },
+  "devDependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/instrument-sans": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "sharp": "^0.33.5"
+  }
+}
